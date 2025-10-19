@@ -21,3 +21,10 @@ def crear_mensaje(mensaje: str):
     mensajes.append(nuevo_mensaje)
     contador += 1
     return nuevo_mensaje
+@app.put("/mensajes/{mensajes_id}")
+def actualizar_mensaje(mensajes_id: int, mensaje: str):
+    for msg in mensajes:
+        if msg["id"] == mensajes_id:
+            msg["mensaje"] = mensaje
+            return msg
+    raise HTTPException(status_code=404, detail="Mensaje no encontrado")
